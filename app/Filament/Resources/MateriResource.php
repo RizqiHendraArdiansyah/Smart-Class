@@ -27,7 +27,9 @@ class MateriResource extends Resource
     protected static ?string $navigationLabel = 'Materi';
 
     public static ?string $label = 'Materi';
-
+    
+    protected static ?string $pluralLabel = 'Materi Pembelajaran';
+    
     protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form

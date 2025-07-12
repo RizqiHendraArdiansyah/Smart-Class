@@ -46,6 +46,7 @@ class DosenPanelProvider extends PanelProvider
             ->id('dosen')
             ->path('dosen')
             ->login(LoginDosen::class)
+            ->brandName('Smart Class')
             ->registration(RegisterDosen::class)
             ->spa()
             ->colors([
@@ -81,8 +82,8 @@ class DosenPanelProvider extends PanelProvider
                         NavigationItem::make()
                             ->label('Dashboard')
                             ->icon('heroicon-o-home')
-                            ->isActiveWhen(fn (): bool => request()->routeIs('filament.dosen.pages.dashboard'))
-                            ->url(fn (): string => Dashboard::getUrl()),
+                            ->isActiveWhen(fn(): bool => request()->routeIs('filament.dosen.pages.dashboard'))
+                            ->url(fn(): string => Dashboard::getUrl()),
                     ])
                     ->groups([
                         // NavigationItem::make('Dashboard')
@@ -97,10 +98,10 @@ class DosenPanelProvider extends PanelProvider
                                 ...KelasResource::getNavigationItems(),
                                 ...MahasiswaResource::getNavigationItems(),
                                 ...RoleResource::getNavigationItems(),
-                            NavigationItem::make('Daftar Nilai')
-                                ->icon('heroicon-o-chart-bar')
-                                ->isActiveWhen(fn (): bool => request()->routeIs('filament.dosen.pages.nilai'))
-                                ->url(fn (): string => Nilai::getUrl()),
+                                NavigationItem::make('Daftar Nilai')
+                                    ->icon('heroicon-o-chart-bar')
+                                    ->isActiveWhen(fn(): bool => request()->routeIs('filament.dosen.pages.nilai'))
+                                    ->url(fn(): string => Nilai::getUrl()),
                             ]),
                         NavigationGroup::make('Materi')
                             ->label('Materi & Pembelajaran')
@@ -113,8 +114,8 @@ class DosenPanelProvider extends PanelProvider
                                 // ...SoalResource::getNavigationItems(),
 
                             ]),
-                        NavigationGroup::make('Evaluasi')
-                            ->label('Evaluasi')
+                        NavigationGroup::make('Penilaian')
+                            ->label('Penilaian')
                             ->collapsible(true)
                             // ->icon('heroicon-o-user')
                             ->items([
@@ -137,7 +138,7 @@ class DosenPanelProvider extends PanelProvider
             // ->theme(asset('css/filament/dosen/theme.css'))
             ->authMiddleware([
                 Authenticate::class,
-                RoleMiddleware::class.':dosen',
+                RoleMiddleware::class . ':dosen',
             ]);
     }
 }

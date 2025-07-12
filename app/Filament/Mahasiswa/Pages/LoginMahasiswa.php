@@ -30,12 +30,18 @@ class LoginMahasiswa extends Login
     protected function getLoginFormComponent(): Component
     {
         return TextInput::make('login')
-            ->label('Username (NIM Mahasiswa)')
+            ->label('Username (NIM)')
             ->required()
             ->numeric()
             ->autocomplete()
             ->autofocus()
             ->extraInputAttributes(['tabindex' => 1]);
+    }
+    protected function getRememberFormComponent(): Component
+    {
+        return \Filament\Forms\Components\Checkbox::make('remember')
+            ->label('Ingat saya')
+            ->extraInputAttributes(['tabindex' => 3]);
     }
 
     protected function getCredentialsFromFormData(array $data): array

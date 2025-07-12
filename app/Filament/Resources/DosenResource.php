@@ -26,8 +26,9 @@ class DosenResource extends Resource
     protected static ?string $navigationLabel = 'Daftar Dosen';
 
     // protected static ?string $navigationGroup = 'User';
+    protected static ?string $label = 'Daftar Dosen';
 
-    public static ?string $label = 'Daftar Dosen';
+    public static ?string $pluralLabel = 'Daftar Dosen';
 
     public static function form(Form $form): Form
     {
@@ -36,7 +37,7 @@ class DosenResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255)
-                    ->placeholder('Masukkan Nama Kamu'),
+                    ->placeholder('Masukkan Nama Lengkap'),
                 TextInput::make('email')
                     ->email()
                     ->required()
@@ -46,7 +47,7 @@ class DosenResource extends Resource
                 TextInput::make('nomor_induk')
                     ->required()
                     ->maxLength(255)
-                    ->placeholder('Masukkan nomor induk'),
+                    ->placeholder('Masukkan Nomor Induk (NIDN)'),
                 TextInput::make('password')
                     ->password()
                     ->dehydrateStateUsing(static fn (?string $state): ?string => filled($state) ? Hash::make($state) : null)
@@ -79,16 +80,16 @@ class DosenResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime('d F Y, H:i')
-                    ->label('Email diverifikasi sejak')
-                    ->sortable(),
+                // Tables\Columns\TextColumn::make('email_verified_at')
+                //     ->dateTime('d F Y, H:i')
+                //     ->label('Email diverifikasi sejak')
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('nomor_induk')
                     ->searchable()
                     ->copyable()
                     ->copyMessage('Berhasil Disalin')
                     ->sortable()
-                    ->label('Nomor Induk'),
+                    ->label('NIDN'),
                 Tables\Columns\TextColumn::make('roles.name')
                     ->searchable()
                     ->copyable()
@@ -109,6 +110,7 @@ class DosenResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -127,7 +129,7 @@ class DosenResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDosens::route('/'),
+            'index' => Pages\ListDosen::route('/'),
             'create' => Pages\CreateDosen::route('/create'),
             'edit' => Pages\EditDosen::route('/{record}/edit'),
         ];

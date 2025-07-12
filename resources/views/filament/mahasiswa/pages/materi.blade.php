@@ -1,3 +1,3 @@
 <x-filament-panels::page>
-    @livewire('materi')
+    @livewire('Materi')
 </x-filament-panels::page>

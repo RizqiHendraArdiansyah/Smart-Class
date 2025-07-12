@@ -14,7 +14,7 @@
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow relative overflow-hidden border-t-8 {{ $quiz->sudah_dikerjakan ? 'border-gradient-to-r from-orange-400 to-pink-500' : ($quiz->title == 'JavaScript Dasar' ? 'border-yellow-400' : ($quiz->title == 'React Hooks' ? 'border-cyan-400' : 'border-blue-400')) }}">
                     <div class="flex items-center gap-4 p-4">
                         <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-2xl
-                            {{ $quiz->title == 'HTML Dasar' ? 'bg-orange-100 text-orange-500 dark:bg-orange-900 dark:text-orange-300'
+                            {{ $quiz->title == 'HTML Dasar' ? 'bg-red-100 text-red-500 dark:bg-red-900 dark:text-red-300'
                             : ($quiz->title == 'CSS Fundamental' ? 'bg-blue-100 text-blue-500 dark:bg-blue-900 dark:text-blue-300'
                             : ($quiz->title == 'JavaScript Dasar' ? 'bg-yellow-100 text-yellow-500 dark:bg-yellow-900 dark:text-yellow-300'
                             : 'bg-cyan-100 text-cyan-500 dark:bg-cyan-900 dark:text-cyan-300')) }}">
@@ -44,9 +44,9 @@
                             <div class="flex flex-col gap-1 mt-2">
                                 @if($quiz->attempt)
                                     <div class="text-green-600 dark:text-green-300 font-bold text-lg">
-                                        Nilai: {{ $quiz->attempt->score }} ({{ ucfirst($quiz->attempt->difficulty_level) }})
+                                        Nilai Kuis : {{ $quiz->attempt->score }} ({{ ucfirst($quiz->attempt->difficulty_level) }})
                                     </div>
-                                    <span class="ml-2 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 text-xs font-semibold">Selesai</span>
+                                    <span class="ml-2 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 text-xs font-semibold">Kuis telah selesai dikerjakan</span>
                                 @else
                                     {{-- <button wire:click="selectQuiz({{ $quiz->id }})" class="mt-1 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold shadow hover:from-purple-600 hover:to-indigo-600 transition">Kerjakan</button> --}}
                                 @endif
@@ -60,9 +60,9 @@
                             {{-- <button class="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 py-2 rounded-full font-semibold shadow hover:from-purple-600 hover:to-indigo-600 transition">Ulangi</button> --}}
                         @else
                             @if($quiz->is_passcode_enabled)
-                                <button wire:click="selectQuiz({{ $quiz->id }})" class="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 py-2 rounded-full font-semibold shadow hover:from-purple-600 hover:to-indigo-600 transition">Kerjakan <span class="ml-2">→</span></button>
+                                <button wire:click="selectQuiz({{ $quiz->id }})" class="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 py-2 rounded-full font-semibold shadow hover:from-purple-600 hover:to-indigo-600 transition">Kerjakan Sekarang<span class="ml-2">→</span></button>
                             @else
-                                <button wire:click="selectQuiz({{ $quiz->id }})" class="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 py-2 rounded-full font-semibold shadow hover:from-purple-600 hover:to-indigo-600 transition">Kerjakan <span class="ml-2">→</span></button>
+                                <button wire:click="selectQuiz({{ $quiz->id }})" class="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 py-2 rounded-full font-semibold shadow hover:from-purple-600 hover:to-indigo-600 transition">Kerjakan Sekarang <span class="ml-2">→</span></button>
                             @endif
                         @endif
                     </div>
@@ -85,7 +85,7 @@
                     @foreach(['easy' => 'Mudah', 'medium' => 'Sedang', 'hard' => 'Sulit'] as $level => $label)
                         @if(in_array($level, $userAttempts))
                         <button class="w-32 h-32 rounded-full bg-gray-400 text-white font-semibold shadow cursor-not-allowed flex items-center justify-center text-md text-center" disabled>
-                            <span>{{ $label }}<br><span class="text-xs">(Sudah)</span></span>
+                            <span>{{ $label }}<br><span class="text-xs">(Sudah Dikerjakan)</span></span>
                         </button>
                         @else
                         <button wire:click="chooseDifficulty('{{ $level }}')" class="w-32 h-32 rounded-full flex items-center justify-center text-md font-semibold shadow transition {{ $level == 'easy' ? 'bg-green-500 hover:bg-green-600' : ($level == 'medium' ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-red-500 hover:bg-red-600') }} text-white text-center">
@@ -205,10 +205,9 @@
                     name="answer_{{ $q->id }}"
                     value="{{ $opt['option'] }}"
                     wire:click="pilihJawaban({{ $q->id }}, '{{ $opt['option'] }}')"
-                    {{ isset($answers[$q->id]) && $answers[$q->id] === $opt['option'] ? 'checked' : '' }}
-                >
-                <span class="text-base text-gray-900 dark:text-gray-100">{{ $opt['option'] }}</span>
-            </div>
+                    {{ isset($answers[$q->id]) && $answers[$q->id] === $opt['option'] ? 'checked' : '' }}>
+                        <span class="text-base text-gray-900 dark:text-gray-100">{{ $opt['option'] }}</span>
+                            </div>
                                 @endforeach
                             </div>
                         @elseif($q->type == 'true_false')
@@ -244,9 +243,9 @@
                     <div class="w-24 h-24 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center text-4xl text-white font-bold">{{ explode(' ', $score)[0] }}</div>
                     <div class="absolute top-0 right-0 bg-yellow-400 dark:bg-yellow-700 text-white text-xs font-bold rounded-full px-2 py-1">+{{ explode(' ', $score)[0] }}</div>
                 </div>
-                <h3 class="text-2xl font-bold mt-4 mb-2 text-gray-900 dark:text-gray-100">Kuis Selesai!</h3>
-                <div class="text-lg font-semibold mb-1 text-gray-900 dark:text-gray-100">Nilai Anda: {{ $score }}</div>
-                <div class="text-gray-500 dark:text-gray-300 mb-2">Bagus! Anda memahami sebagian besar materi.</div>
+                <h3 class="text-2xl font-bold mt-4 mb-2 text-gray-900 dark:text-gray-100">Yeyyy, Kuis Selesai!</h3>
+                <div class="text-lg font-semibold mb-1 text-gray-900 dark:text-gray-100">Nilai yang didapat: {{ $score }}</div>
+                <div class="text-gray-500 dark:text-gray-300 mb-2">Tetap Semangat dan Terus Belajar Yaaa!!!.</div>
             </div>
             <div class="w-full mb-6">
                 @foreach($questions as $q)

@@ -57,7 +57,7 @@ class RegisterMahasiswa extends Register
     protected function getUserNameFormComponent(): Component
     {
         return TextInput::make('nomor_induk')
-            ->label('NIM')
+            ->label('Username (NIM)')
             ->numeric()
             ->required()
             ->maxLength(255)
@@ -67,7 +67,7 @@ class RegisterMahasiswa extends Register
     protected function getNameFormComponent(): Component
     {
         return TextInput::make('name')
-            ->label('Nama')
+            ->label('Nama Mahasiswa')
             ->required()
             ->maxLength(255)
             ->unique($this->getUserModel());

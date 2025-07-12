@@ -25,7 +25,10 @@ class ModulResource extends Resource
 
     protected static ?string $navigationLabel = 'Modul';
 
+    
     public static ?string $label = 'Modul';
+
+    protected static ?string $pluralLabel = 'Modul Pembelajaran';
 
     protected static ?int $navigationSort = 1;
 

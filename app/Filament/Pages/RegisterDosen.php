@@ -57,7 +57,7 @@ class RegisterDosen extends Register
     protected function getUserNameFormComponent(): Component
     {
         return TextInput::make('nomor_induk')
-            ->label('NISN')
+            ->label('Username (NIDN)')
             ->numeric()
             ->required()
             ->maxLength(255)
@@ -67,7 +67,7 @@ class RegisterDosen extends Register
     protected function getNameFormComponent(): Component
     {
         return TextInput::make('name')
-            ->label('Nama')
+            ->label('Nama Dosen')
             ->required()
             ->maxLength(255)
             ->unique($this->getUserModel());

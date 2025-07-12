@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\TextInput;
 use Filament\Http\Responses\Auth\Contracts\LoginResponse;
@@ -30,12 +31,19 @@ class LoginDosen extends Login
     protected function getLoginFormComponent(): Component
     {
         return TextInput::make('login')
-            ->label('Username (NISN)')
+            ->label('Username (NIDN)')
             ->required()
             ->numeric()
             ->autocomplete()
             ->autofocus()
             ->extraInputAttributes(['tabindex' => 1]);
+    }
+
+    protected function getRememberFormComponent(): Component
+    {
+        return Checkbox::make('remember')
+            ->label('Ingat saya')
+            ->extraInputAttributes(['tabindex' => 3]);
     }
 
     protected function getCredentialsFromFormData(array $data): array

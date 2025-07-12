@@ -2,7 +2,7 @@
     <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold flex items-center gap-2 text-gray-900 dark:text-gray-100">
-                <span>🏆</span> Leaderboard Nilai
+                <span>🏆</span> Leaderboard Nilai Mahasiswa
             </h2>
         </div>
         <div class="mb-4 flex gap-4 items-center">
@@ -17,7 +17,7 @@
                 </div>
             @endif
             <div>
-                <label class="font-semibold text-gray-700 dark:text-gray-200 mr-2">Kesulitan:</label>
+                <label class="font-semibold text-gray-700 dark:text-gray-200 mr-2">Tingkat Kesulitan:</label>
                 <select wire:model="selectedDifficulty" wire:change="updateLeaderboard" class="input input-bordered dark:bg-gray-900 dark:text-gray-100">
                     @foreach($difficultyOptions as $key => $label)
                         <option value="{{ $key }}">{{ $label }}</option>
@@ -73,10 +73,10 @@
             <table class="min-w-full text-sm">
                 <thead>
                     <tr class="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-200">
-                        <th class="py-2 px-3">#</th>
-                        <th class="py-2 px-3 text-left">Siswa</th>
+                        <th class="py-2 px-3">Nomor</th>
+                        <th class="py-2 px-3 text-left">Nama Mahasiswa</th>
                         <th class="py-2 px-3">Kuis</th>
-                        <th class="py-2 px-3">Nilai</th>
+                        <th class="py-2 px-3">Nilai Kuis</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -29,6 +29,8 @@ class MahasiswaResource extends Resource
     // protected static ?string $navigationGroup = 'User';
     public static ?string $label = 'Daftar Mahasiswa';
 
+    protected static ?string $pluralLabel = 'Daftar Mahasiswa';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -79,16 +81,16 @@ class MahasiswaResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime('d F Y, H:i')
-                    ->label('Email diverifikasi sejak')
-                    ->sortable(),
+                // Tables\Columns\TextColumn::make('email_verified_at')
+                //     ->dateTime('d F Y, H:i')
+                //     ->label('Email diverifikasi sejak')
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('nomor_induk')
                     ->searchable()
                     ->copyable()
                     ->copyMessage('Berhasil Disalin')
                     ->sortable()
-                    ->label('Nomor Induk'),
+                    ->label('NIM'),
                 Tables\Columns\TextColumn::make('roles.name')
                     ->searchable()
                     ->copyable()

@@ -30,6 +30,8 @@ class SoalResource extends Resource
 
     public static ?string $label = 'Soal';
 
+    protected static ?string $pluralLabel = 'Daftar Soal';
+
     public static function form(Form $form): Form
     {
         return $form

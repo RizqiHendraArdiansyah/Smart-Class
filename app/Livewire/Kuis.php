@@ -224,6 +224,7 @@ class Kuis extends Component
     {
         $this->answers[$questionId] = $jawaban;
         // dd($this->answers);
+        // dd($this->answers);
     }
 
     public function nextQuestion()

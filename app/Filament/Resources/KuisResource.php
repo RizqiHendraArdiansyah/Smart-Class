@@ -27,6 +27,8 @@ class KuisResource extends Resource
     // protected static ?string $navigationGroup = 'Materi';
 
     public static ?string $label = 'Kuis';
+    
+    protected static ?string $pluralLabel = 'Daftar Kuis';
 
     protected static ?int $navigationSort = 3;
 

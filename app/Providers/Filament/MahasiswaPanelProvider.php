@@ -37,6 +37,7 @@ class MahasiswaPanelProvider extends PanelProvider
             ->id('mahasiswa')
             ->path('mahasiswa')
             ->login(LoginMahasiswa::class)
+            ->brandName('Smart Class')
             ->registration(RegisterMahasiswa::class)
             ->passwordReset(ForgetMahasiswa::class)
             ->spa()
@@ -61,24 +62,24 @@ class MahasiswaPanelProvider extends PanelProvider
                 return $builder->items([
                     \Filament\Navigation\NavigationItem::make('Dashboard')
                         ->icon('heroicon-o-home')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.mahasiswa.pages.dashboard'))
-                        ->url(fn (): string => Dashboard::getUrl()),
+                        ->isActiveWhen(fn(): bool => request()->routeIs('filament.mahasiswa.pages.dashboard'))
+                        ->url(fn(): string => Dashboard::getUrl()),
                     // \Filament\Navigation\NavigationItem::make('Kelas Saya')
                     //     ->icon('heroicon-o-academic-cap')
                     //     ->isActiveWhen(fn (): bool => request()->routeIs('filament.mahasiswa.pages.kelas'))
                     //     ->url(fn (): string => Kelas::getUrl()),
-                    \Filament\Navigation\NavigationItem::make('Materi')
+                    \Filament\Navigation\NavigationItem::make('Materi Pembelajaran')
                         ->icon('heroicon-o-book-open')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.mahasiswa.pages.materi'))
-                        ->url(fn (): string => Materi::getUrl()),
-                    \Filament\Navigation\NavigationItem::make('Kuis')
+                        ->isActiveWhen(fn(): bool => request()->routeIs('filament.mahasiswa.pages.materi'))
+                        ->url(fn(): string => Materi::getUrl()),
+                    \Filament\Navigation\NavigationItem::make('Kuis Soal')
                         ->icon('heroicon-o-clipboard-document-list')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.mahasiswa.pages.kuis'))
-                        ->url(fn (): string => Kuis::getUrl()),
-                    \Filament\Navigation\NavigationItem::make('Nilai')
+                        ->isActiveWhen(fn(): bool => request()->routeIs('filament.mahasiswa.pages.kuis'))
+                        ->url(fn(): string => Kuis::getUrl()),
+                    \Filament\Navigation\NavigationItem::make('Nilai & Hasil')
                         ->icon('heroicon-o-chart-bar')
-                        ->isActiveWhen(fn (): bool => request()->routeIs('filament.mahasiswa.pages.nilai'))
-                        ->url(fn (): string => Nilai::getUrl()),
+                        ->isActiveWhen(fn(): bool => request()->routeIs('filament.mahasiswa.pages.nilai'))
+                        ->url(fn(): string => Nilai::getUrl()),
                     // \Filament\Navigation\NavigationItem::make('Jadwal')
                     //     ->icon('heroicon-o-calendar')
                     //     ->url('#'),
@@ -105,7 +106,7 @@ class MahasiswaPanelProvider extends PanelProvider
             // ->theme(asset('css/filament/mahasiswa/theme.css'))
             ->authMiddleware([
                 Authenticate::class,
-                RoleMiddleware::class.':mahasiswa',
+                RoleMiddleware::class . ':mahasiswa',
             ]);
     }
 }

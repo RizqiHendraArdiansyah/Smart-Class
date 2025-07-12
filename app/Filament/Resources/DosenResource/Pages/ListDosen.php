@@ -13,7 +13,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Notifications\Notification;
 use Filament\Support\Enums\ActionSize;
 
-class ListDosens extends ListRecords
+class ListDosen extends ListRecords
 {
     protected static string $resource = DosenResource::class;
 
