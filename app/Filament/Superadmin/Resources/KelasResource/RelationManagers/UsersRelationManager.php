@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Filament\Resources\KelasResource\RelationManagers;
+namespace App\Filament\Superadmin\Resources\KelasResource\Pages;
 
 use App\Models\User;
 use Filament\Forms;

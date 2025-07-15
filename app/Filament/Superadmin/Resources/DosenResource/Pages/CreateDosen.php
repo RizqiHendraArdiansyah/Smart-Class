@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\DosenResource\Pages;
+namespace App\Filament\Superadmin\Resources\DosenResource\Pages;
 
-use App\Filament\Resources\DosenResource;
+use App\Filament\Superadmin\Resources\DosenResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateDosen extends CreateRecord

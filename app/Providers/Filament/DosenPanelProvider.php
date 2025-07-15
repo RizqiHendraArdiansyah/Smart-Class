@@ -94,10 +94,7 @@ class DosenPanelProvider extends PanelProvider
                             ->label('Manajemen Data')
                             // ->icon('heroicon-o-user')
                             ->items([
-                                ...DosenResource::getNavigationItems(),
-                                ...KelasResource::getNavigationItems(),
                                 ...MahasiswaResource::getNavigationItems(),
-                                ...RoleResource::getNavigationItems(),
                                 NavigationItem::make('Daftar Nilai')
                                     ->icon('heroicon-o-chart-bar')
                                     ->isActiveWhen(fn(): bool => request()->routeIs('filament.dosen.pages.nilai'))
@@ -129,7 +126,6 @@ class DosenPanelProvider extends PanelProvider
             })
             ->viteTheme('resources/css/filament/dosen/theme.css')
             ->plugins([
-                FilamentShieldPlugin::make(),
                 BreezyCore::make()
                     ->myProfile(),
                 // AuthUIEnhancerPlugin::make(),

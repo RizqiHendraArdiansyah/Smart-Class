@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Superadmin\Resources;
 
-use App\Filament\Resources\KelasResource\Pages;
-use App\Filament\Resources\KelasResource\RelationManagers\ModuleRelationManager;
-use App\Filament\Resources\KelasResource\RelationManagers\UsersRelationManager;
+use App\Filament\Superadmin\Resources\KelasResource\Pages;
+use App\Filament\Superadmin\Resources\KelasResource\Pages\ModuleRelationManager;
+use App\Filament\Superadmin\Resources\KelasResource\Pages\UsersRelationManager;
 use App\Models\Kelas\KelasModel;
 use App\Models\User;
 use Filament\Forms\Components\Select;

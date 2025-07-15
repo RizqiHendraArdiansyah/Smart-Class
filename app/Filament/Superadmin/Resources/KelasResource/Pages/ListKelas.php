@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\KelasResource\Pages;
+namespace App\Filament\Superadmin\Resources\KelasResource\Pages;
 
-use App\Filament\Resources\KelasResource;
+use App\Filament\Superadmin\Resources\KelasResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 

@@ -1,20 +1,22 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Superadmin\Resources;
 
-use App\Filament\Resources\DosenResource\Pages;
-use App\Filament\Resources\DosenResource\Pages\CreateDosen;
-use App\Filament\Resources\DosenResource\Pages\EditDosen;
+use App\Filament\Superadmin\Resources\DosenResource\Pages;
+use App\Filament\Superadmin\Resources\DosenResource\Pages\CreateDosen;
+use App\Filament\Superadmin\Resources\DosenResource\Pages\EditDosen;
+use App\Filament\Superadmin\Resources\DosenResource\RelationManagers;
+use App\Models\Dosen;
 use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Resources\Pages\Page;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Hash;
 
 class DosenResource extends Resource
@@ -30,7 +32,7 @@ class DosenResource extends Resource
 
     public static ?string $pluralLabel = 'Daftar Dosen';
 
-    public static function form(Form $form): Form
+  public static function form(Form $form): Form
     {
         return $form
             ->schema([
