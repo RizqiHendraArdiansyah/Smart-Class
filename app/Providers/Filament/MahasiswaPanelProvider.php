@@ -39,7 +39,7 @@ class MahasiswaPanelProvider extends PanelProvider
             ->login(LoginMahasiswa::class)
             ->brandName('Smart Class')
             ->registration(RegisterMahasiswa::class)
-            ->passwordReset(ForgetMahasiswa::class)
+            // ->passwordReset(ForgetMahasiswa::class)
             ->spa()
             ->emailVerification()
             ->font('Poppins')
