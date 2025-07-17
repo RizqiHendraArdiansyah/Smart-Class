@@ -94,6 +94,7 @@ class DosenPanelProvider extends PanelProvider
                             ->label('Manajemen Data')
                             // ->icon('heroicon-o-user')
                             ->items([
+                                ...KelasResource::getNavigationItems(),
                                 ...MahasiswaResource::getNavigationItems(),
                                 NavigationItem::make('Daftar Nilai')
                                     ->icon('heroicon-o-chart-bar')

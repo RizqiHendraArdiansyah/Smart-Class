@@ -51,11 +51,11 @@ class MahasiswaResource extends Resource
                     ->placeholder('Masukkan nomor induk'),
                 TextInput::make('password')
                     ->password()
-                    ->dehydrateStateUsing(static fn (?string $state): ?string => filled($state) ? Hash::make($state) : null)
-                    ->required(static fn (Page $livewire): string => $livewire instanceof CreateMahasiswa)
-                    ->dehydrated(static fn (?string $state): bool => filled($state))
+                    ->dehydrateStateUsing(static fn(?string $state): ?string => filled($state) ? Hash::make($state) : null)
+                    ->required(static fn(Page $livewire): string => $livewire instanceof CreateMahasiswa)
+                    ->dehydrated(static fn(?string $state): bool => filled($state))
                     ->label(
-                        static fn (Page $livewire): string => ($livewire instanceof EditMahasiswa) ? 'Ganti Password' : 'Masukkan Password'
+                        static fn(Page $livewire): string => ($livewire instanceof EditMahasiswa) ? 'Ganti Password' : 'Masukkan Password'
                     ),
                 // Forms\Components\DateTimePicker::make('email_verified_at'),
                 // Forms\Components\TextInput::make('theme')
@@ -74,7 +74,7 @@ class MahasiswaResource extends Resource
     {
         return $table
             ->modifyQueryUsing(
-                fn (Builder $query) => $query->role('mahasiswa')
+                fn(Builder $query) => $query->role('mahasiswa')
             )
             ->columns([
                 Tables\Columns\TextColumn::make('name')
