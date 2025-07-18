@@ -50,7 +50,7 @@ class MateriResource extends Resource
                     ->options([
                         'text' => 'Text',
                         // 'video' => 'Video',
-                        'pdf' => 'PDF',
+                        // 'pdf' => 'PDF',
                         // 'link' => 'Link',
                     ])
                     ->required()
@@ -59,7 +59,7 @@ class MateriResource extends Resource
 
                 RichEditor::make('content')
                     ->columnSpanFull()
-                    ->visible(fn($get) => $get('type') === 'text')
+                    // ->visible(fn($get) => $get('type') === 'text')
                     ->required(fn($get) => $get('type') === 'text')
                     ->fileAttachmentsDirectory('materi/images')
                     ->fileAttachmentsVisibility('public'),
@@ -71,11 +71,11 @@ class MateriResource extends Resource
                 //     ->fileAttachmentsDirectory('materi/images')
                 //     ->fileAttachmentsVisibility('public'),
 
-                FileUpload::make('content')
-                    ->visible(fn($get) => $get('type') === 'pdf')
-                    ->required(fn($get) => $get('type') === 'pdf')
-                    ->acceptedFileTypes(['application/pdf'])
-                    ->directory('materi/pdf'),
+                // FileUpload::make('content')
+                //     ->visible(fn($get) => $get('type') === 'pdf')
+                //     ->required(fn($get) => $get('type') === 'pdf')
+                //     ->acceptedFileTypes(['application/pdf'])
+                //     ->directory('materi/pdf'),
 
                 //         TextInput::make('content')
                 //             ->visible(fn ($get) => in_array($get('type'), ['video', 'link']))
