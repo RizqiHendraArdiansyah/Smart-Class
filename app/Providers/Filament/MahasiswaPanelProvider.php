@@ -46,6 +46,7 @@ class MahasiswaPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->favicon(asset('storage/gambar/logo.png'))
             ->viteTheme('resources/css/filament/mahasiswa/theme.css')
             ->discoverResources(in: app_path('Filament/Mahasiswa/Resources'), for: 'App\\Filament\\Mahasiswa\\Resources')
             ->discoverPages(in: app_path('Filament/Mahasiswa/Pages'), for: 'App\\Filament\\Mahasiswa\\Pages')
