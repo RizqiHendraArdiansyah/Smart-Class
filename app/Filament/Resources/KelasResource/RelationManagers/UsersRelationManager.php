@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Filament\Resources\KelasResource\Pages;
 
 use App\Models\User;
@@ -35,8 +36,10 @@ class UsersRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('name')
+                ->label('Nama Mahasiswa'),
+                Tables\Columns\TextColumn::make('nomor_induk')
+                ->label('NIM Mahasiswa'),
             ])
             ->filters([
                 //
@@ -46,8 +49,8 @@ class UsersRelationManager extends RelationManager
                 Tables\Actions\AttachAction::make()
                     ->label('Tambahkan Mahasiswa')
                     ->modalHeading('Pilih Mahasiswa untuk Ditambahkan')
-                    ->// Definisikan form di dalam AttachAction untuk memilih user
-                    form(fn (Tables\Actions\AttachAction $action): array => [
+                    -> // Definisikan form di dalam AttachAction untuk memilih user
+                    form(fn(Tables\Actions\AttachAction $action): array => [
                         Forms\Components\Select::make('recordId') // 'recordId' adalah key konvensi Filament
                             ->label('Mahasiswa')
                             // ->// Query HANYA user dengan role 'Mahasiswa'
@@ -56,12 +59,12 @@ class UsersRelationManager extends RelationManager
                             ->searchable()
                             ->required()
                             ->preload() // Preload options jika jumlah user tidak terlalu besar
-                        // Filament otomatis mengecualikan user yang sudah ter-attach
-                            ->options(fn () => User::whereDoesntHave('kelas', fn ($query) => $query->where('class_id', $this->ownerRecord->id))
-                                ->whereHas('roles', fn (Builder $query) => $query->where('name', 'Mahasiswa'))
+                            // Filament otomatis mengecualikan user yang sudah ter-attach
+                            ->options(fn() => User::whereDoesntHave('kelas', fn($query) => $query->where('class_id', $this->ownerRecord->id))
+                                ->whereHas('roles', fn(Builder $query) => $query->where('name', 'Mahasiswa'))
                                 ->pluck('name', 'id')),
                     ])
-                        ->preloadRecordSelect(), // Preload user yang sudah ter-attach jika diedit (meski edit tidak dipakai di sini)
+                    ->preloadRecordSelect(), // Preload user yang sudah ter-attach jika diedit (meski edit tidak dipakai di sini)
             ])
             ->actions([
                 // Ganti DeleteAction dengan DetachAction

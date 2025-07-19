@@ -38,7 +38,7 @@ class MahasiswaResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255)
-                    ->placeholder('Masukkan Nama Kamu'),
+                    ->placeholder('Masukkan Nama Lengkap'),
                 TextInput::make('email')
                     ->email()
                     ->required()
@@ -48,7 +48,7 @@ class MahasiswaResource extends Resource
                 TextInput::make('nomor_induk')
                     ->required()
                     ->maxLength(255)
-                    ->placeholder('Masukkan nomor induk'),
+                    ->placeholder('Masukkan Nomor Induk (NIM)'),
                 TextInput::make('password')
                     ->password()
                     ->dehydrateStateUsing(static fn(?string $state): ?string => filled($state) ? Hash::make($state) : null)
@@ -78,9 +78,10 @@ class MahasiswaResource extends Resource
             )
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
+                    ->searchable()
+                    ->label('Nama Mahasiswa'),
+                // Tables\Columns\TextColumn::make('email')
+                //     ->searchable(),
                 // Tables\Columns\TextColumn::make('email_verified_at')
                 //     ->dateTime('d F Y, H:i')
                 //     ->label('Email diverifikasi sejak')
@@ -90,7 +91,7 @@ class MahasiswaResource extends Resource
                     ->copyable()
                     ->copyMessage('Berhasil Disalin')
                     ->sortable()
-                    ->label('NIM'),
+                    ->label('NIM Mahasiswa'),
                 Tables\Columns\TextColumn::make('roles.name')
                     ->searchable()
                     ->copyable()

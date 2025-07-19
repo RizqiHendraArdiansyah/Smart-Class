@@ -65,10 +65,10 @@ class KelasResource extends Resource
                     })
                     ->default(date('Y')),
 
-                TextInput::make('offering')
-                    ->columnSpanFull()
-                    // ->required()
-                    ->label('Offering'),
+                // TextInput::make('offering')
+                //     ->columnSpanFull()
+                //     // ->required()
+                //     ->label('Offering'),
                 Textarea::make('description')
                     ->columnSpanFull()
                     // ->required()

@@ -79,7 +79,8 @@ class DosenResource extends Resource
             )
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()
+                    ->label('Nama Dosen'),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 // Tables\Columns\TextColumn::make('email_verified_at')

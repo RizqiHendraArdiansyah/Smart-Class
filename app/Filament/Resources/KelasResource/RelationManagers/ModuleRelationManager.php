@@ -50,17 +50,17 @@ class ModuleRelationManager extends RelationManager
                     ->searchable()
                     ->sortable()
                     ->label('Judul Modul'),
-                Tables\Columns\TextColumn::make('deskripsi')
-                    ->sortable()
-                    ->label('Deskripsi'),
-                // Hitung jumlah materi dalam modul ini
-                Tables\Columns\TextColumn::make('materials_count')
-                    ->counts('materi')
-                    ->label('Jumlah Materi'),
-                // Hitung jumlah kuis dalam modul ini
-                Tables\Columns\TextColumn::make('quizzes_count')
-                    ->counts('kuis')
-                    ->label('Jumlah Kuis'),
+                // Tables\Columns\TextColumn::make('deskripsi')
+                //     ->sortable()
+                //     ->label('Deskripsi'),
+                // // Hitung jumlah materi dalam modul ini
+                // Tables\Columns\TextColumn::make('materials_count')
+                //     ->counts('materi')
+                //     ->label('Jumlah Materi'),
+                // // Hitung jumlah kuis dalam modul ini
+                // Tables\Columns\TextColumn::make('quizzes_count')
+                //     ->counts('kuis')
+                //     ->label('Jumlah Kuis'),
                 TextColumn::make('class_id')
                     ->label('Kelas')
                     ->formatStateUsing(function ($state, $record) {

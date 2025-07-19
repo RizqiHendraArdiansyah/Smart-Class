@@ -60,12 +60,12 @@ class ModulResource extends Resource
                 Textarea::make('description')
                     ->columnSpanFull()
                     ->label('Deskripsi'),
-                TextInput::make('waktu')
-                    ->columnSpanFull()
-                    ->required()
-                    ->numeric()
-                    ->suffix('Menit')
-                    ->label('Durasi (menit)'),
+                // TextInput::make('waktu')
+                //     ->columnSpanFull()
+                //     ->required()
+                //     ->numeric()
+                //     ->suffix('Menit')
+                //     ->label('Durasi (menit)'),
             ]);
     }
 
