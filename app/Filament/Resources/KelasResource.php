@@ -34,6 +34,7 @@ class KelasResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->required()
+                    ->disabled() //tidak bisa diubah
                     ->columnSpanFull()
                     ->label('Kelas'),
                 Select::make('user_id')
@@ -41,12 +42,15 @@ class KelasResource extends Resource
                     ->preload()
                     ->options(fn () => User::role('dosen')->pluck('name', 'id'))
                     ->required()
+                    ->disabled() //tidak bisa diubah
                     ->label('Dosen')
                     ->columnSpanFull(),
                 Select::make('semester')
                     ->required()
+                    ->disabled() //tidak bisa diubah
                     ->columnSpanFull()
                     ->label('Semester')
+                    ->disabled() //tidak bisa diubah
                     ->options([
                         1 => 'Ganjil',
                         2 => 'Genap',
@@ -57,6 +61,7 @@ class KelasResource extends Resource
                     ->searchable()
                     ->preload()
                     ->label('Tahun Ajaran')
+                    ->disabled() //tidak bisa diubah
                     ->options(function () {
                         $currentYear = (int) date('Y');
                         $years = range(2000, $currentYear);
@@ -72,11 +77,14 @@ class KelasResource extends Resource
                 Textarea::make('description')
                     ->columnSpanFull()
                     // ->required()
-                    ->label('Deskripsi'),
+                    ->label('Deskripsi')
+                    ->disabled(), //tidak bisa diubah
+
                 Select::make('is_aktif')
                     ->required()
                     ->columnSpanFull()
                     ->label('Status')
+                    ->disabled() //tidak bisa diubah
                     ->options([
                         1 => 'Aktif',
                         0 => 'Tidak Aktif',
