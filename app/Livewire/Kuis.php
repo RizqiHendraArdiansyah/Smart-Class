@@ -74,6 +74,9 @@ class Kuis extends Component
                     return $q;
                 })->filter()->values()->all(); // array of questions
                 $this->userAnswers = $jawabanModels->pluck('answer', 'question_id')->toArray();
+
+
+
                 $this->score = $attempt->score . ' / ' . count($this->questions);
                 $this->step = 'result';
                 return;
@@ -151,6 +154,26 @@ class Kuis extends Component
             ->exists();
 
         if ($sudah) {
+            // Jika sudah ada attempt, ambil jawaban dari database
+            $attempt = KuisCobaModel::where('quiz_id', $this->selectedQuiz->id)
+                ->where('user_id', $user->id)
+                ->where('difficulty_level', $this->currentDifficulty)
+                ->first();
+
+            $jawabanModels = KuisJawabanModel::where('quiz_attempt_id', $attempt->id)->with('pertanyaan')->get();
+            $this->questions = $jawabanModels->map(function ($jawaban) {
+                $q = $jawaban->pertanyaan;
+                if ($q) {
+                    $q->is_correct = $jawaban->is_correct;
+                }
+                return $q;
+            })->filter()->values()->all();
+
+            $this->userAnswers = $jawabanModels->pluck('answer', 'question_id')->toArray();
+
+
+
+            $this->score = $attempt->score . ' / ' . count($this->questions);
             $this->step = 'result';
             return;
         }
@@ -173,6 +196,8 @@ class Kuis extends Component
             $isCorrect = false;
             $pointsAwarded = 0;
             $totalQuestions++;
+
+
 
             if ($q->type === 'multiple_choice') {
                 // Pastikan opsi di-decode
@@ -204,6 +229,8 @@ class Kuis extends Component
             // Simpan ke array jawaban user
             $this->userAnswers[$q->id] = $userAnswer;
             $q->is_correct = $isCorrect;
+
+
         }
 
         $finalScore = $totalQuestions > 0 ? $score : 0;
@@ -223,8 +250,15 @@ class Kuis extends Component
     public function pilihJawaban($questionId, $jawaban)
     {
         $this->answers[$questionId] = $jawaban;
-        // dd($this->answers);
-        // dd($this->answers);
+    }
+
+    public function resetAnswerForCurrentQuestion()
+    {
+        // Reset jawaban untuk pertanyaan yang sedang aktif
+        if (isset($this->questions[$this->currentQuestionIndex])) {
+            $currentQuestionId = $this->questions[$this->currentQuestionIndex]->id;
+            unset($this->answers[$currentQuestionId]);
+        }
     }
 
 
@@ -233,16 +267,22 @@ class Kuis extends Component
     {
         if ($this->currentQuestionIndex < count($this->questions) - 1) {
             $this->currentQuestionIndex++;
+            // Reset jawaban untuk pertanyaan baru
+            $this->resetAnswerForCurrentQuestion();
         } else {
             // If we're at the end of current difficulty, move to next difficulty
             if ($this->currentDifficulty === 'easy' && count($this->difficultyGroups['medium']) > 0) {
                 $this->questions = $this->difficultyGroups['medium'];
                 $this->currentDifficulty = 'medium';
                 $this->currentQuestionIndex = 0;
+                // Reset jawaban untuk pertanyaan baru
+                $this->resetAnswerForCurrentQuestion();
             } elseif ($this->currentDifficulty === 'medium' && count($this->difficultyGroups['hard']) > 0) {
                 $this->questions = $this->difficultyGroups['hard'];
                 $this->currentDifficulty = 'hard';
                 $this->currentQuestionIndex = 0;
+                // Reset jawaban untuk pertanyaan baru
+                $this->resetAnswerForCurrentQuestion();
             }
         }
     }
@@ -251,16 +291,22 @@ class Kuis extends Component
     {
         if ($this->currentQuestionIndex > 0) {
             $this->currentQuestionIndex--;
+            // Reset jawaban untuk pertanyaan baru
+            $this->resetAnswerForCurrentQuestion();
         } else {
             // If we're at the start of current difficulty, move to previous difficulty
             if ($this->currentDifficulty === 'medium' && count($this->difficultyGroups['easy']) > 0) {
                 $this->questions = $this->difficultyGroups['easy'];
                 $this->currentDifficulty = 'easy';
                 $this->currentQuestionIndex = count($this->questions) - 1;
+                // Reset jawaban untuk pertanyaan baru
+                $this->resetAnswerForCurrentQuestion();
             } elseif ($this->currentDifficulty === 'hard' && count($this->difficultyGroups['medium']) > 0) {
                 $this->questions = $this->difficultyGroups['medium'];
                 $this->currentDifficulty = 'medium';
                 $this->currentQuestionIndex = count($this->questions) - 1;
+                // Reset jawaban untuk pertanyaan baru
+                $this->resetAnswerForCurrentQuestion();
             }
         }
     }
