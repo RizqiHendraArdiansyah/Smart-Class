@@ -13,9 +13,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Materi\MateriProgressModel;
+use Filament\Models\Contracts\HasAvatar;
+use Illuminate\Support\Facades\Storage;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 
-class User extends Authenticatable
-    // implements MustVerifyEmail
+class User extends Authenticatable implements FilamentUser, HasAvatar
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, HasRoles, Notifiable;
@@ -42,6 +45,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar_url ? Storage::url($this->avatar_url) : null ;
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -66,6 +74,10 @@ class User extends Authenticatable
             ->implode('');
     }
 
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true;
+    }
     public function kelas()
     {
         // Parameter kedua adalah nama tabel pivot

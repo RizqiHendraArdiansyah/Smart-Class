@@ -49,6 +49,7 @@ class DosenPanelProvider extends PanelProvider
             ->brandName('Smart Class')
             ->registration(RegisterDosen::class)
             ->spa()
+            ->profile()
             ->colors([
                 'primary' => Color::Amber,
             ])

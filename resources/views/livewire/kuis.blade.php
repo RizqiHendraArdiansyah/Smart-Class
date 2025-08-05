@@ -204,8 +204,8 @@
                     <input type="radio"
                     name="answer_{{ $q->id }}"
                     value="{{ $opt['option'] }}"
-                    wire:click="pilihJawaban({{ $q->id }}, '{{ $opt['option'] }}')"
-                    {{ isset($answers[$q->id]) && $answers[$q->id] === $opt['option'] ? 'checked' : '' }}>
+                    wire:model="answers.{{ $q->id }}"
+                    wire:click="pilihJawaban({{ $q->id }}, '{{ $opt['option'] }}')">
                         <span class="text-base text-gray-900 dark:text-gray-100">{{ $opt['option'] }}</span>
                             </div>
                                 @endforeach
@@ -213,16 +213,16 @@
                         @elseif($q->type == 'true_false')
                             <div class="flex gap-4">
                                 <label class="flex-1 cursor-pointer bg-white dark:bg-gray-800 rounded-lg px-4 py-3 border border-gray-200 dark:border-gray-700 hover:border-purple-400 text-center font-bold text-lg transition">
-                                    <input type="radio" wire:model="answers.{{ $q->id }}" value="true" class="form-radio text-purple-500 mr-2"> Benar
+                                    <input type="radio" wire:model="answers.{{ $q->id }}" value="true" class="form-radio text-purple-500 mr-2" wire:click="pilihJawaban({{ $q->id }}, 'true')"> Benar
                                 </label>
                                 <label class="flex-1 cursor-pointer bg-white dark:bg-gray-800 rounded-lg px-4 py-3 border border-gray-200 dark:border-gray-700 hover:border-purple-400 text-center font-bold text-lg transition">
-                                    <input type="radio" wire:model="answers.{{ $q->id }}" value="false" class="form-radio text-purple-500 mr-2"> Salah
+                                    <input type="radio" wire:model="answers.{{ $q->id }}" value="false" class="form-radio text-purple-500 mr-2" wire:click="pilihJawaban({{ $q->id }}, 'false')"> Salah
                                 </label>
                             </div>
                         @elseif($q->type == 'short_answer')
-                            <input type="text" wire:model.lazy="answers.{{ $q->id }}" class="input input-bordered w-full text-lg px-4 py-3 mt-2 dark:bg-gray-900 dark:text-gray-100" placeholder="Ketik jawaban Anda di sini...">
+                            <input type="text" wire:model.lazy="answers.{{ $q->id }}" wire:change="pilihJawaban({{ $q->id }}, $event.target.value)" class="input input-bordered w-full text-lg px-4 py-3 mt-2 dark:bg-gray-900 dark:text-gray-100" placeholder="Ketik jawaban Anda di sini...">
                         @elseif($q->type == 'essay')
-                            <textarea wire:model.lazy="answers.{{ $q->id }}" class="textarea textarea-bordered w-full text-lg px-4 py-3 mt-2 dark:bg-gray-900 dark:text-gray-100" rows="4" placeholder="Ketik jawaban Anda di sini..."></textarea>
+                            <textarea wire:model.lazy="answers.{{ $q->id }}" wire:change="pilihJawaban({{ $q->id }}, $event.target.value)" class="textarea textarea-bordered w-full text-lg px-4 py-3 mt-2 dark:bg-gray-900 dark:text-gray-100" rows="4" placeholder="Ketik jawaban Anda di sini..."></textarea>
                         @endif
                     </div>
                 @endif

@@ -227,6 +227,8 @@ class Kuis extends Component
         // dd($this->answers);
     }
 
+
+
     public function nextQuestion()
     {
         if ($this->currentQuestionIndex < count($this->questions) - 1) {
